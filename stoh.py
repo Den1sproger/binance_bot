@@ -92,7 +92,8 @@ class Stream:
         
         print('k ==> ', slowk[-1])
         print('d ==> ', slowd[-1])
-
+        
+        self.last_number_of_trades = number_of_trades
         time.sleep(1)
 
 
