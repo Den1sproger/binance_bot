@@ -73,8 +73,8 @@ class Stream:
         # ema 50 and 150
         ema_50 = talib.EMA(np.array(self.prices_data[2]), timeperiod=50)[-1]
         ema_150 = talib.EMA(np.array(self.prices_data[2]), timeperiod=150)[-1]
-        # print(f'50: {ema_50}')
-        # print(f'150 {ema_150}\n')
+        print(f'50: {ema_50}')
+        print(f'150 {ema_150}\n')
         # stochastic
         slowk, slowd = talib.STOCH(
             high=np.array(self.prices_data[0]),
@@ -82,31 +82,32 @@ class Stream:
             close=np.array(self.prices_data[2]),
             fastk_period=5, slowk_period=5, slowd_period=5
         )
-        # print(f'Orange: {slowk[-1]}')
-        # print(f'Blue: {slowd[-1]}')
+        print(f'Orange: {slowk[-1]}')
+        print(f'Blue: {slowd[-1]}')
 
         # condition
-        if (ema_50 < ema_150 and self.last_ema_50) and \
-            (self.last_ema_50 > self.last_ema_150 and not self.buy) and \
-            (slowk > 80 and slowd > 80) and \
-            (slowk > slowd and self.last_slowk) and \
-            (self.last_slowk < self.last_slowd):
-            print('Buy!')
-            self.place_order('buy')
-            self.buy = True
-            self.sell = False
+        # if (ema_50 < ema_150 and self.last_ema_50) and \
+        #     (self.last_ema_50 > self.last_ema_150 and not self.buy) and \
+        #     (slowk > 80 and slowd > 80) and \
+        #     (slowk > slowd and self.last_slowk) and \
+        #     (self.last_slowk < self.last_slowd):
+        #     print('Buy!')
+        #     self.place_order('buy')
+        #     self.buy = True
+        #     self.sell = False
 
-        elif (ema_50 > ema_150 and self.last_ema_50) and \
-            (self.last_ema_50 > self.last_ema_150 and not self.sell):
-            print('Sell!')
-            self.place_order('sell')
-            self.buy = False
-            self.sell = True
+        # elif (ema_50 > ema_150 and self.last_ema_50) and \
+        #     (self.last_ema_50 > self.last_ema_150 and not self.sell):
+        #     print('Sell!')
+        #     self.place_order('sell')
+        #     self.buy = False
+        #     self.sell = True
 
-        self.last_ema_50 = ema_50
-        self.last_ema_150 = ema_150
-        self.last_slowk = slowk
-        self.last_slowd = slowd
+        # self.last_ema_50 = ema_50
+        # self.last_ema_150 = ema_150
+        # self.last_slowk = slowk
+        # self.last_slowd = slowd
+        self.last_number_of_trades = number_of_trades
 
 
     def streaming(self):
